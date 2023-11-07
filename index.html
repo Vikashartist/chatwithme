@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<style>
+.chat-container {
+    max-width: 400px;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.chat-log {
+    max-height: 300px;
+    overflow-y: scroll;
+}
+
+input {
+    width: 70%;
+    padding: 10px;
+    border: none;
+    border-top: 1px solid #ccc;
+    border-radius: 0 0 5px 5px;
+}
+
+button {
+    width: 20%;
+    padding: 10px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 0 0 5px 0;
+}
+
+.user1 input, .user1 button {
+    background-color: #3498db;
+}
+
+.user2 input, .user2 button {
+    background-color: #e74c3c;
+}
+
+
+</style>
+
+<body>
+    <div class="chat-container">
+        <div class="chat-log" id="chatLog"></div>
+        <div class="user1">
+            <input type="text" id="user1Input" placeholder="User 1's message...">
+            <button onclick="sendMessage('user1Input', 'User 1')">Send</button>
+        </div>
+        <div class="user2">
+            <input type="text" id="user2Input" placeholder="User 2's message...">
+            <button onclick="sendMessage('user2Input', 'User 2')">Send</button>
+        </div>
+    </div>
+
+
+    <script>
+  function sendMessage(inputId, sender) {
+    const messageInput = document.getElementById(inputId);
+    const message = messageInput.value;
+
+    if (message.trim() !== "") {
+        const chatLog = document.getElementById("chatLog");
+        const messageDiv = document.createElement("div");
+        messageDiv.className = `chat-message ${sender}`;
+        messageDiv.textContent = `${sender}: ${message}`;
+        chatLog.appendChild(messageDiv);
+        messageInput.value = ""; // Clear the input field
+        chatLog.scrollTop = chatLog.scrollHeight; // Scroll to the bottom
+    }
+}
+
+    </script>
+</body>
+</html>
